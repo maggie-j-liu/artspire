@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
+import { HiPlusCircle } from "react-icons/hi";
 export default function Home() {
   const defaultSupplies = ["pencil", "crayon", "paint", "brush"];
 
@@ -48,33 +49,36 @@ export default function Home() {
               );
             })}
             <div
-              className={`rounded-lg border border-2 border-gray-300 bg-white px-4 py-4 hover:border-gray-400`}
+              className={`rounded-lg border-2 border-gray-300 bg-white px-4 py-4 hover:border-gray-400`}
             >
-              <input
-                value={newSupplyName}
-                onChange={(e) => setNewSupplyName(e.target.value)}
-                type="text"
-                className="border-b-4"
-              />
-              <button
-                type="button"
-                className="addbut"
-                onClick={() => createSupply()}
-              >
-                {" "}
-                &nbsp;&nbsp;&nbsp;<b> &#10133;</b>
-              </button>
+              <p className="mb-1 text-xs font-semibold text-gray-500">
+                custom supply:
+              </p>
+              <div className="flex items-center justify-between gap-4 ">
+                <input
+                  value={newSupplyName}
+                  onChange={(e) => setNewSupplyName(e.target.value)}
+                  type="text"
+                  className="min-w-0 flex-shrink border-b-4"
+                />
+                <button
+                  type="button"
+                  className="addbut hover:text-fuchsia-600"
+                  onClick={() => createSupply()}
+                >
+                  <HiPlusCircle className="h-6 w-6" />
+                </button>
+              </div>
             </div>
           </div>
+          <Link
+            href="/colors"
+            className="mt-6 ml-auto block w-max rounded-md bg-fuchsia-200 px-4 py-2 hover:bg-fuchsia-300"
+          >
+            Continue &rarr;
+          </Link>
         </div>
       </div>
-      <center>
-        <div
-          className={`w-32 rounded-lg border-2 border-gray-300 bg-white px-4 py-3 hover:border-gray-400`}
-        >
-          <Link href="/colors">Continue &rarr;</Link>
-        </div>
-      </center>
     </div>
   );
 }
