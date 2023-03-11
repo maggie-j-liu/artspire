@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+.button {
+    padding: 10px;
+}
+
+.supplies{
+    display: grid;
+    flex-direction: row;
+    gap: 20px 50px;
+}
+
+.contin {
+    border-color: gray;
+    border-style: solid;
+    background-color: white;
+}
+
+.addbut {
+    margin-right: -10%;
+    padding-right: 0;
+}
