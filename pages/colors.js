@@ -1,44 +1,96 @@
-import { useState } from "react"
-
-
-
-  // Usage
+import Link from "next/link";
+import { useState } from "react";
+import { HiX } from "react-icons/hi";
 
 export default function Home() {
-
-
-  const [currentColor, setCurrentColor] = useState("#000000")
-  const [colors, setColors] = useState([])
+  const [currentColor, setCurrentColor] = useState("#000000");
+  const [colors, setColors] = useState([]);
 
   function saveColor() {
-    setColors([...colors, currentColor])
+    if (colors.includes(currentColor)) return;
+    setColors([...colors, currentColor]);
+  }
+
+  function removeColor(col) {
+    setColors(colors.filter((color) => color !== col));
   }
 
   return (
     <div>
       <div className="px-8 py-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="mx-auto max-w-4xl">
           <div className="flex items-center justify-center gap-4">
-            <div className="px-4 py-4 flex items-center w-max gap-4" style={{ backgroundColor: currentColor }}>
-              <input type="color" value={currentColor} className="w-12" onChange={(e) => {
-                setCurrentColor(e.target.value)
-              }} />
-              <div className="bg-white px-1 rounded font-semibold">
+            <label
+              className="flex w-max items-center gap-4 px-4 py-4"
+              style={{ backgroundColor: currentColor }}
+            >
+              <input
+                type="color"
+                value={currentColor}
+                className="w-12"
+                onChange={(e) => {
+                  setCurrentColor(e.target.value);
+                }}
+              />
+              <div className="rounded bg-white px-1 font-semibold">
                 chosen color: {currentColor}
               </div>
-            </div>
-            <button onClick={saveColor} className="bg-fuchsia-400 px-4 text-white py-1 rounded-md shadow font-semibold hover:shadow-lg hover:bg-fuchsia-500 duration-150">Save color</button>
-            </div>
+            </label>
+            <button
+              onClick={saveColor}
+              className="rounded-md bg-fuchsia-400 px-4 py-1 font-semibold text-white shadow duration-150 hover:bg-fuchsia-500 hover:shadow-lg"
+            >
+              Save color
+            </button>
+          </div>
           <div>
-          saved colors:
-          <div className="grid grid-cols-5">
-            {colors.map(color => (
-              <div key={color} className="w-32 h-32" style={{ backgroundColor: color }}></div>
-            ))}
+            <h1 className="text-2xl font-semibold">Your colors</h1>
+            {colors.length === 0 ? (
+              <p>
+                no colors yet! use the color picker above to choose colors that
+                you have or want to use in your art
+              </p>
+            ) : (
+              <div className="mt-4 grid grid-cols-5 gap-y-8">
+                {colors.map((color) => (
+                  <div
+                    key={color}
+                    className="relative h-32 w-32 rounded-md border"
+                    style={{ backgroundColor: color }}
+                  >
+                    <button
+                      className="absolute -top-2.5 -right-2.5 flex h-5 w-5 items-center justify-center rounded-full bg-white text-red-400 outline outline-red-400 hover:bg-red-400 hover:text-white"
+                      type="button"
+                      onClick={() => removeColor(color)}
+                    >
+                      <HiX className="w-3" />
+                    </button>
+                    <div className="group flex h-full w-full items-center justify-center">
+                      <div className="rounded-md bg-white/60 px-2.5 py-1 font-medium group-hover:bg-white">
+                        {color}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="mt-6">
+              {colors.length === 0 ? (
+                <div className="ml-auto block w-max cursor-not-allowed rounded-md bg-fuchsia-200 px-4 py-2 saturate-50">
+                  Continue &rarr;
+                </div>
+              ) : (
+                <Link
+                  href="/generate"
+                  className="ml-auto block w-max rounded-md bg-fuchsia-200 px-4 py-2 hover:bg-fuchsia-300"
+                >
+                  Continue &rarr;
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </div>
     </div>
-   </div>
-  )
+  );
 }
