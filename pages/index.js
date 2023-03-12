@@ -8,7 +8,7 @@ export default function Home() {
         <div className="main">
           <h1 className="title text-3xl font-semibold">🎨 Artspire</h1>
           <h2>Unlimited Art With Limited Resources</h2>
-          <p className="desc max-w-5xl">
+          <p className="desc max-w-5xl rounded-md">
             We believe that creativity should never be limited by the lack of
             resources at hand. This website not only caters towards that lack,
             but also addresses environmental issues. Our curated collection of
@@ -31,8 +31,8 @@ export default function Home() {
           <br></br>
 
           <Link
-            href="http://localhost:3000/supplies"
-            className={`rounded-lg bg-fuchsia-200 px-4 py-2.5 hover:bg-fuchsia-300`}
+            href="/supplies"
+            className={`rounded-lg bg-[#CCB197] px-4 py-2.5 hover:bg-[#b59b82]`}
           >
             Get Started &rarr;
           </Link>

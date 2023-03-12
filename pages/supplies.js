@@ -70,7 +70,7 @@ export default function Home() {
                     <div className="flex items-center justify-center gap-4">
                       <div>{supply.name}</div>
                       {supply.image ? (
-                        <img class="img2" src={`/${supply.image}`}></img>
+                        <img className="img2" src={`/${supply.image}`}></img>
                       ) : null}
                     </div>
                   </button>
@@ -92,7 +92,7 @@ export default function Home() {
                 />
                 <button
                   type="button"
-                  className="addbut hover:text-fuchsia-600"
+                  className="addbut hover:text-[#b59b82]"
                   onClick={() => createSupply()}
                 >
                   <HiPlusCircle className="h-6 w-6" />
@@ -102,7 +102,7 @@ export default function Home() {
           </div>
           <Link
             href={`/colors?supplies=${genQueryParam()}`}
-            className="mt-6 ml-auto block w-max rounded-md bg-fuchsia-200 px-4 py-2 hover:bg-fuchsia-300"
+            className="mt-6 ml-auto block w-max rounded-md bg-[#CCB197] px-4 py-2 hover:bg-[#b59b82]"
           >
             Continue &rarr;
           </Link>
