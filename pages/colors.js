@@ -49,9 +49,9 @@ export default function Home() {
             </label>
             <button
               onClick={saveColor}
-              className="rounded-md bg-fuchsia-400 px-4 py-1 font-semibold text-white shadow duration-150 hover:bg-fuchsia-500 hover:shadow-lg"
+              className="rounded-md bg-[#CCB197] px-4 py-1 font-semibold text-white shadow duration-150 hover:bg-[#b59b82] hover:shadow-lg"
             >
-              Save color
+              Add color
             </button>
           </div>
           <div>
@@ -87,13 +87,13 @@ export default function Home() {
             )}
             <div className="mt-6">
               {colors.length === 0 ? (
-                <div className="ml-auto block w-max cursor-not-allowed rounded-md bg-fuchsia-200 px-4 py-2 saturate-50">
+                <div className="ml-auto block w-max cursor-not-allowed rounded-md bg-[#CCB197] px-4 py-2 saturate-50">
                   Continue &rarr;
                 </div>
               ) : (
                 <Link
                   href={`/generate?${genQueryParam()}`}
-                  className="ml-auto block w-max rounded-md bg-fuchsia-200 px-4 py-2 hover:bg-fuchsia-300"
+                  className="ml-auto block w-max rounded-md bg-[#CCB197] px-4 py-2 hover:bg-[#b59b82]"
                 >
                   Continue &rarr;
                 </Link>

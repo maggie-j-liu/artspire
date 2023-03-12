@@ -6,6 +6,24 @@ import { useEffect, useState } from "react";
 
 const emojis = ["✏️", "🎨", "🖌️", "✨", "📝", "🖋️", "🖼️", "✍️"];
 
+const RenderColors = ({ text }) => {
+  const words = text.split(" ").map((word, i) => {
+    if (word.match(/^#[0-9a-f]{6}$/i)) {
+      return (
+        <span key={i}>
+          <span
+            className="mr-1 inline-block h-3.5 w-3.5"
+            style={{ backgroundColor: word }}
+          />
+          <span className="font-bold">{word}</span>{" "}
+        </span>
+      );
+    }
+    return word + " ";
+  });
+  return <>{words}</>;
+};
+
 const Generate = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -77,11 +95,17 @@ const Generate = () => {
     <div className="min-h-screen">
       <div className="mx-auto max-w-3xl px-8 py-10">
         <h1 className="text-xl font-semibold">{title}</h1>
-        <p className="font-medium text-gray-500">{description}</p>
+        <p className="font-medium text-gray-500">
+          <RenderColors text={description} />
+        </p>
         <h2 className="mt-4 text-lg font-medium">Materials</h2>
-        <div className="whitespace-pre-wrap">{materials}</div>
+        <div className="whitespace-pre-wrap">
+          <RenderColors text={materials} />
+        </div>
         <h2 className="mt-4 text-lg font-medium">Steps</h2>
-        <div className="whitespace-pre-wrap">{steps}</div>
+        <div className="whitespace-pre-wrap">
+          <RenderColors text={steps} />
+        </div>
         <Image
           className="mt-6 w-3/5"
           width={1024}

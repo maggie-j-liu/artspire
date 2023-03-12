@@ -3,12 +3,12 @@ import { useState } from "react";
 import Link from "next/link";
 export default function Home() {
   return (
-    <>
+    <main>
       <div className="min-h-screen bg-gray-100">
         <div className="main">
           <h1 className="title text-3xl font-semibold">🎨 Artspire</h1>
           <h2>Unlimited Art With Limited Resources</h2>
-          <p className="desc max-w-5xl rounded-md">
+          <p className="desc max-w-5xl rounded-lg">
             We believe that creativity should never be limited by the lack of
             resources at hand. This website not only caters towards that lack,
             but also addresses environmental issues. Our curated collection of
@@ -38,6 +38,6 @@ export default function Home() {
           </Link>
         </div>
       </div>
-    </>
+    </main>
   );
 }
