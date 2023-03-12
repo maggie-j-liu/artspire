@@ -1,10 +1,9 @@
-import { useState } from "react"
-import Link  from "next/link"
+import { useState } from "react";
+import Link from "next/link";
+import { HiPlusCircle } from "react-icons/hi";
 import { Alex_Brush } from "next/font/google"
 export default function Home() {
-    const defaultSupplies = [
-        ["pencil","pencil.jpg"],["crayon","crayon.jpg"],["paint","paint.jpg"],["brush","brush.jpg"],["pen","pen.jpg"],["watercolor","watercolor.jpg"],["pastels", "pastels.jpg"],["clay","clay.jpg"]
-    ]
+    const defaultSupplies =["pencil","pencil.jpg"],["crayon","crayon.jpg"],["paint","paint.jpg"],["brush","brush.jpg"],["pen","pen.jpg"],["watercolor","watercolor.jpg"],["pastels", "pastels.jpg"],["clay","clay.jpg"]
     const [supplies, setSupplies] = useState(() => defaultSupplies.map(sup => ({name: sup, chosen: false})))
     const [newSupplyName, setNewSupplyName] = useState("")
     function addsup(supply) {
@@ -23,41 +22,75 @@ export default function Home() {
     }
     let num = 0;
 
-    
-    return (
-        <div className="bg-gray-100 min-h-screen">
-            <div className="max-w-3xl mx-auto">
-                <div className={`bg-gray-100 py-10`}>
-                    <h1 id = "choose">Choose your supplies:</h1>
-                    <br></br>
-                    <div className="grid gap-4 grid-cols-3">
-                        {supplies.map((supply) => {
-                            num++
-                            return (
-                                <>
-                                <button key={supply.name} type="button" className ={`rounded-lg px-4 py-4 border-2 ${supply.chosen ? "border-emerald-300 bg-emerald-50 hover:border-emerald-400" : "bg-white border-gray-300 hover:border-gray-400"}`} onClick={() => {addsup(supply.name)}}>{supply.name}
-                                <img class = "img2" src = {defaultSupplies[num-1][1]}></img> </button>
-                                </>
-                                )
-                            })}
-                            <div
-                            className ={`rounded-lg px-4 py-4 border-2 bg-white border-gray-300 hover:border-gray-400`}
-                            >
-                            <input value={newSupplyName} onChange={(e) => setNewSupplyName(e.target.value)} type="text" className="border-b-4" />
-                            <button type="button" className="addbut" onClick={() => createSupply()}> &nbsp;&nbsp;&nbsp;<b>	&#10133;</b></button>
-                        </div>
-                    </div>
-    
-                </div>
-            </div>
-            <center>
-                <div className = {`rounded-lg px-4 py-3 border-2 bg-white border-gray-300 hover:border-gray-400 w-32`}>
-                    <Link href="/colors">
-                        Continue &rarr;
-                    </Link>
-                </div>
-            </center>
-        </div>
+  const genQueryParam = () => {
+    const chosenSupplies = supplies.reduce((acc, curr) => {
+      if (curr.chosen) {
+        acc.push(curr.name);
+      }
+      return acc;
+    }, []);
+    return JSON.stringify(chosenSupplies);
+  };
 
-    );
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <div className="mx-auto max-w-3xl">
+        <div className={`bg-gray-100 py-10`}>
+          <h1 id="choose">Choose your supplies:</h1>
+          <br></br>
+          <div className="grid grid-cols-3 gap-4">
+            {supplies.map((supply) => {
+                num++
+              return (
+                <>
+                <button
+                  key={supply.name}
+                  type="button"
+                  className={`rounded-lg border-2 px-4 py-4 ${
+                    supply.chosen
+                      ? "border-emerald-300 bg-emerald-50 hover:border-emerald-400"
+                      : "border-gray-300 bg-white hover:border-gray-400"
+                  }`}
+                  onClick={() => {
+                    addsup(supply.name);
+                  }}
+                >
+                  {supply.name}
+                </button>
+                <img class = "img2" src = {defaultSupplies[num-1][1]}></img></>
+              );
+            })}
+            <div
+              className={`rounded-lg border-2 border-gray-300 bg-white px-4 py-4 hover:border-gray-400`}
+            >
+              <p className="mb-1 text-xs font-semibold text-gray-500">
+                custom supply:
+              </p>
+              <div className="flex items-center justify-between gap-4 ">
+                <input
+                  value={newSupplyName}
+                  onChange={(e) => setNewSupplyName(e.target.value)}
+                  type="text"
+                  className="min-w-0 flex-shrink border-b-4"
+                />
+                <button
+                  type="button"
+                  className="addbut hover:text-fuchsia-600"
+                  onClick={() => createSupply()}
+                >
+                  <HiPlusCircle className="h-6 w-6" />
+                </button>
+              </div>
+            </div>
+          </div>
+          <Link
+            href={`/colors?supplies=${genQueryParam()}`}
+            className="mt-6 ml-auto block w-max rounded-md bg-fuchsia-200 px-4 py-2 hover:bg-fuchsia-300"
+          >
+            Continue &rarr;
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 }
