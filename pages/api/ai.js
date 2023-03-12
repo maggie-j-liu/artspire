@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   }
   console.log(req.body.supplies.join("\n"));
   console.log(req.body.colors.join("\n"));
-  const system = `You are an assistant who suggests art projects for students. Each student will provide a list of supplies they have and a list of colors they want to use, in hexadecimal form. Generate one artwork idea, using the supplies and colors provided. When responding, never make vague references to "colors" or "hex codes," always use the actual color names.
+  const system = `You are an assistant who suggests art projects for students. Each student will provide a list of supplies they have and a list of colors they want to use, in hexadecimal form. Generate one artwork idea (prefer concrete drawings over abstract ones), using the supplies and colors provided. When responding, never make vague references to "colors" or "hex codes," always use the actual color names.
 
     Respond in the following format (replace the <text in angle brackets> with your response):
 
@@ -60,7 +60,7 @@ ${req.body.colors.join("\n")}
     .split("---")
     .map((x) => x.trim());
   const image = await openai.createImage({
-    prompt: `This is a piece of artwork. ${description}`,
+    prompt: `This is a piece of artwork drawn by a professional artist. ${description}`,
     n: 1,
     size: "1024x1024",
   });
