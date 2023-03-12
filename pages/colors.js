@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { useState } from "react";
 import { HiX } from "react-icons/hi";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [currentColor, setCurrentColor] = useState("#000000");
   const [colors, setColors] = useState([]);
+  const router = useRouter();
 
   function saveColor() {
     if (colors.includes(currentColor)) return;
@@ -14,6 +16,15 @@ export default function Home() {
   function removeColor(col) {
     setColors(colors.filter((color) => color !== col));
   }
+
+  const genQueryParam = () => {
+    const currentQuery = router.query;
+    const params = new URLSearchParams({
+      supplies: currentQuery.supplies,
+      colors: JSON.stringify(colors),
+    });
+    return params.toString();
+  };
 
   return (
     <div>
@@ -81,7 +92,7 @@ export default function Home() {
                 </div>
               ) : (
                 <Link
-                  href="/generate"
+                  href={`/generate?${genQueryParam()}`}
                   className="ml-auto block w-max rounded-md bg-fuchsia-200 px-4 py-2 hover:bg-fuchsia-300"
                 >
                   Continue &rarr;

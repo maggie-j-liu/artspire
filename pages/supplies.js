@@ -23,6 +23,16 @@ export default function Home() {
     setNewSupplyName("");
   }
 
+  const genQueryParam = () => {
+    const chosenSupplies = supplies.reduce((acc, curr) => {
+      if (curr.chosen) {
+        acc.push(curr.name);
+      }
+      return acc;
+    }, []);
+    return JSON.stringify(chosenSupplies);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="mx-auto max-w-3xl">
@@ -35,7 +45,7 @@ export default function Home() {
                 <button
                   key={supply.name}
                   type="button"
-                  className={`rounded-lg border border-2 px-4 py-4 ${
+                  className={`rounded-lg border-2 px-4 py-4 ${
                     supply.chosen
                       ? "border-emerald-300 bg-emerald-50 hover:border-emerald-400"
                       : "border-gray-300 bg-white hover:border-gray-400"
@@ -72,7 +82,7 @@ export default function Home() {
             </div>
           </div>
           <Link
-            href="/colors"
+            href={`/colors?supplies=${genQueryParam()}`}
             className="mt-6 ml-auto block w-max rounded-md bg-fuchsia-200 px-4 py-2 hover:bg-fuchsia-300"
           >
             Continue &rarr;
