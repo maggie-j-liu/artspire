@@ -1,26 +1,40 @@
 import { useState } from "react";
 import Link from "next/link";
 import { HiPlusCircle } from "react-icons/hi";
-import { Alex_Brush } from "next/font/google"
+import { Alex_Brush } from "next/font/google";
 export default function Home() {
-    const defaultSupplies =["pencil","pencil.jpg"],["crayon","crayon.jpg"],["paint","paint.jpg"],["brush","brush.jpg"],["pen","pen.jpg"],["watercolor","watercolor.jpg"],["pastels", "pastels.jpg"],["clay","clay.jpg"]
-    const [supplies, setSupplies] = useState(() => defaultSupplies.map(sup => ({name: sup, chosen: false})))
-    const [newSupplyName, setNewSupplyName] = useState("")
-    function addsup(supply) {
-        const suppliesCopy = [...supplies]
-        for (let sup of suppliesCopy) {
-            if (sup.name == supply) {
-                sup.chosen = !sup.chosen
-            }
-        }
-        setSupplies(suppliesCopy)
+  const defaultSupplies = [
+    ["pencil", "pencil.png"],
+    ["crayon", "crayon.png"],
+    ["paint", "brush.png"],
+    ["pen", "pen.png"],
+    ["watercolor", "watercolor.png"],
+    ["pastels", "pastels.png"],
+    ["clay", "clay-crafting.png"],
+  ];
+  const [supplies, setSupplies] = useState(() =>
+    defaultSupplies.map((sup) => ({
+      name: sup[0],
+      image: sup[1],
+      chosen: false,
+    }))
+  );
+  const [newSupplyName, setNewSupplyName] = useState("");
+  function addsup(supply) {
+    const suppliesCopy = [...supplies];
+    for (let sup of suppliesCopy) {
+      if (sup.name == supply) {
+        sup.chosen = !sup.chosen;
+      }
     }
+    setSupplies(suppliesCopy);
+  }
 
-    function createSupply() {
-        setSupplies([...supplies, { name: newSupplyName, chosen: true }])
-        setNewSupplyName("")
-    }
-    let num = 0;
+  function createSupply() {
+    setSupplies([...supplies, { name: newSupplyName, chosen: true }]);
+    setNewSupplyName("");
+  }
+  let num = 0;
 
   const genQueryParam = () => {
     const chosenSupplies = supplies.reduce((acc, curr) => {
@@ -40,24 +54,27 @@ export default function Home() {
           <br></br>
           <div className="grid grid-cols-3 gap-4">
             {supplies.map((supply) => {
-                num++
               return (
-                <>
-                <button
-                  key={supply.name}
-                  type="button"
-                  className={`rounded-lg border-2 px-4 py-4 ${
-                    supply.chosen
-                      ? "border-emerald-300 bg-emerald-50 hover:border-emerald-400"
-                      : "border-gray-300 bg-white hover:border-gray-400"
-                  }`}
-                  onClick={() => {
-                    addsup(supply.name);
-                  }}
-                >
-                  {supply.name}
-                </button>
-                <img class = "img2" src = {defaultSupplies[num-1][1]}></img></>
+                <div key={supply.name}>
+                  <button
+                    type="button"
+                    className={`h-full w-full rounded-lg border-2 px-4 py-4 ${
+                      supply.chosen
+                        ? "border-emerald-300 bg-emerald-50 hover:border-emerald-400"
+                        : "border-gray-300 bg-white hover:border-gray-400"
+                    }`}
+                    onClick={() => {
+                      addsup(supply.name);
+                    }}
+                  >
+                    <div className="flex items-center justify-center gap-4">
+                      <div>{supply.name}</div>
+                      {supply.image ? (
+                        <img class="img2" src={`/${supply.image}`}></img>
+                      ) : null}
+                    </div>
+                  </button>
+                </div>
               );
             })}
             <div

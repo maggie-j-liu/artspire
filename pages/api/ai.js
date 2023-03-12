@@ -23,7 +23,7 @@ export default async function handler(req, res) {
   console.log(req.body.colors.join("\n"));
   const system = `You are an assistant who suggests art projects for students. Each student will provide a list of supplies they have and a list of colors they want to use, in hexadecimal form. Generate one artwork idea (prefer concrete drawings over abstract ones), using the supplies and colors provided. When responding, never make vague references to "colors" or "hex codes," always use the actual color names.
 
-    Respond in the following format (replace the <text in angle brackets> with your response):
+    Respond in the following format (replace the <text in angle brackets> with your response). Make sure to keep the three dashes between each item:
 
     ---
     <title of the project>
@@ -53,6 +53,7 @@ ${req.body.colors.join("\n")}
         content: user,
       },
     ],
+    temperature: 0.5,
   });
   console.log(response.data.usage);
   const data = response.data.choices[0].message?.content;
