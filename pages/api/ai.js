@@ -56,9 +56,14 @@ ${req.body.colors.join("\n")}
   });
   console.log(response.data.usage);
   const data = response.data.choices[0].message?.content;
+  console.log(data);
   const [, title, description, materials, steps] = data
     .split("---")
     .map((x) => x.trim());
+  console.log(title);
+  console.log(description);
+  console.log(materials);
+  console.log(steps);
   const image = await openai.createImage({
     prompt: `This is a piece of artwork drawn by a professional artist. ${description}`,
     n: 1,
