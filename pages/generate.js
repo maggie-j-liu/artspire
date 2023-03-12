@@ -18,8 +18,11 @@ const Generate = () => {
   const [supplies, setSupplies] = useState([]);
   const [colors, setColors] = useState([]);
   const [emojiIdx, setEmojiIdx] = useState(0);
+  const [generating, setGenerating] = useState(false);
 
   const getGeneration = async ({ supplies, colors }) => {
+    if (generating) return;
+    setGenerating(true);
     console.log("get gen", supplies, colors);
     const ai = await fetch("/api/ai", {
       method: "POST",

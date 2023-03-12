@@ -11,10 +11,11 @@ export default function Home() {
           <p className="desc max-w-5xl">
             We believe that creativity should never be limited by the lack of
             resources at hand. This website not only caters towards that lack,
-            but also addresses environmental issues. Reusing items that
-            otherwise would have gone in the wastebin to create artOur curated
-            collection of art ideas will help you unlock your artistic potential
-            and create stunning masterpieces, regardless of what materials you
+            but also addresses environmental issues. Our curated collection of
+            art ideas will help you to create stunning masterpieces with items
+            that otherwise would have gone in the wastebin. In an environmental
+            friendly and budget friendly way, this website will help you to
+            unlock your artistic potential, regardless of what materials you
             have on hand. With Artspire, you'll never have to worry about not
             having the "right" materials again - all you need is a little
             inspiration(which this website will give) and a willingness to
